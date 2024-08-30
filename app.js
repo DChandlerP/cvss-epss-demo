@@ -16,7 +16,8 @@ async function fetchVulnerabilityData() {
             const data = await response.json();
 
             if (data.vulnerabilities && data.vulnerabilities.length > 0) {
-                const vulnerability = data.vulnerabilities[0];
+                const vulnerability = data.vulnerabilities[0].cve;
+        
                 const cvssMetrics = vulnerability.metrics.cvssMetricV31 ? vulnerability.metrics.cvssMetricV31[0] : null;
 
                 if (cvssMetrics) {
