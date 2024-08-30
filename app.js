@@ -9,13 +9,11 @@ async function fetchVulnerabilityData() {
     resultDiv.innerHTML = 'Loading...';
 
     try {
-        let response, data;
-
         if (selectedApi === 'cvss') {
-            // Call the NVD API for CVSS scores
-            response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${vulnId}`);
+            // Fetch CVSS data from the NVD API
+            const response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${vulnId}`);
             if (!response.ok) throw new Error('Network response was not ok');
-            data = await response.json();
+            const data = await response.json();
 
             if (data.vulnerabilities && data.vulnerabilities.length > 0) {
                 const vulnerability = data.vulnerabilities[0];
@@ -39,10 +37,10 @@ async function fetchVulnerabilityData() {
                 resultDiv.innerHTML = 'No data found for the given CVE ID.';
             }
         } else if (selectedApi === 'epss') {
-            // Call the EPSS API for EPSS scores
-            response = await fetch(`https://api.first.org/data/v1/epss?cve=${vulnId}`);
+            // Fetch EPSS data from the FIRST.org API
+            const response = await fetch(`https://api.first.org/data/v1/epss?cve=${vulnId}`);
             if (!response.ok) throw new Error('Network response was not ok');
-            data = await response.json();
+            const data = await response.json();
 
             if (data.data && data.data.length > 0) {
                 const epssData = data.data[0];
