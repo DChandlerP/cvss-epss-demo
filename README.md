@@ -6,6 +6,15 @@ Certainly! Here's the entire README content in one block for easy copying:
 
 This is a simple web application that allows users to look up vulnerability information using CVE IDs. It fetches data from the NVD for CVSS scores and from the FIRST.org API for EPSS scores.
 
+## Live Demo
+
+You can view a live demo of this project hosted on **GitHub Pages**. This demo provides a real-time preview of the `cvss-epss-demo` repository. 
+
+Check it out here: [CVSS EPSS Demo](https://dchandlerp.github.io/cvss-epss-demo/)
+
+The demo is automatically updated with each push to the main branch, ensuring that it always reflects the latest changes.
+
+
 ## Features
 
 - **Lookup CVSS Scores**: Get detailed CVSS scores for vulnerabilities from the NVD.
