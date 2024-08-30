@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vulnerability Info App</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .result { margin-top: 20px; }
-    </style>
-    <!-- Keep the script in the head if using DOMContentLoaded -->
-    <script src="app.js" defer></script>
+    <title>Vulnerability Lookup App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Vulnerability Lookup</h1>
-    <input type="text" id="vulnId" placeholder="Enter CVE ID" value="CVE-2019-1010218">
-    <div>
-        <label>
-            <input type="radio" name="api" value="cvss" checked> CVSS
-        </label>
-        <label>
-            <input type="radio" name="api" value="epss"> EPSS
-        </label>
-    </div>
-    <button id="fetchButton">Get Info</button>
-    <div class="result" id="result"></div>
+    <header>
+        <h1>Vulnerability Lookup</h1>
+    </header>
+    <main>
+        <div class="explanation">
+            <h3>What is CVSS?</h3>
+            <p>The Common Vulnerability Scoring System (CVSS) is a framework for assessing the severity of security vulnerabilities. It provides a score from 0 to 10, with a higher score indicating a more severe vulnerability. CVSS considers factors such as access complexity, exploitability, and impact. For more information, visit the <a href="https://www.first.org/cvss/" target="_blank">CVSS official page</a>.</p>
+        </div>
+
+        <div class="explanation">
+            <h3>What is EPSS?</h3>
+            <p>The Exploit Prediction Scoring System (EPSS) estimates the probability of a vulnerability being exploited. It provides a score between 0 and 1, indicating the likelihood of exploitation within 30 days. EPSS complements CVSS by focusing on the likelihood of exploitation rather than just severity. Learn more at the <a href="https://www.first.org/epss/" target="_blank">EPSS official page</a>.</p>
+        </div>
+
+        <input type="text" id="vulnId" placeholder="Enter CVE ID" value="CVE-2019-1010218">
+        <div>
+            <label>
+                <input type="radio" name="api" value="cvss" checked> CVSS
+            </label>
+            <label>
+                <input type="radio" name="api" value="epss"> EPSS
+            </label>
+        </div>
+        <button onclick="fetchVulnerabilityData()">Get Info</button>
+        <div class="result" id="result"></div>
+    </main>
+    <script src="app.js"></script>
 </body>
 </html>
