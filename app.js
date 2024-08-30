@@ -12,22 +12,34 @@ async function fetchVulnerabilityData() {
         let response, data;
 
         if (selectedApi === 'cvss') {
+            // Call the NVD API for CVSS scores
             response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${vulnId}`);
             if (!response.ok) throw new Error('Network response was not ok');
             data = await response.json();
 
             if (data.vulnerabilities && data.vulnerabilities.length > 0) {
                 const vulnerability = data.vulnerabilities[0];
-                const cvssScore = vulnerability.cvssMetricV3 ? vulnerability.cvssMetricV3.baseScore : 'N/A';
+                const cvssMetrics = vulnerability.metrics.cvssMetricV31 ? vulnerability.metrics.cvssMetricV31[0] : null;
 
-                resultDiv.innerHTML = `
-                    <h2>Vulnerability: ${vulnId}</h2>
-                    <p><strong>CVSS Score:</strong> ${cvssScore}</p>
-                `;
+                if (cvssMetrics) {
+                    const cvssData = cvssMetrics.cvssData;
+                    resultDiv.innerHTML = `
+                        <h2>Vulnerability: ${vulnId}</h2>
+                        <p><strong>CVSS Version:</strong> ${cvssData.version}</p>
+                        <p><strong>Vector String:</strong> ${cvssData.vectorString}</p>
+                        <p><strong>Base Score:</strong> ${cvssData.baseScore}</p>
+                        <p><strong>Base Severity:</strong> ${cvssData.baseSeverity}</p>
+                        <p><strong>Exploitability Score:</strong> ${cvssMetrics.exploitabilityScore}</p>
+                        <p><strong>Impact Score:</strong> ${cvssMetrics.impactScore}</p>
+                    `;
+                } else {
+                    resultDiv.innerHTML = 'No CVSS metrics found for the given CVE ID.';
+                }
             } else {
                 resultDiv.innerHTML = 'No data found for the given CVE ID.';
             }
         } else if (selectedApi === 'epss') {
+            // Call the EPSS API for EPSS scores
             response = await fetch(`https://api.first.org/data/v1/epss?cve=${vulnId}`);
             if (!response.ok) throw new Error('Network response was not ok');
             data = await response.json();
@@ -50,3 +62,4 @@ async function fetchVulnerabilityData() {
         resultDiv.innerHTML = 'Error fetching data. Please try again later.';
     }
 }
+
