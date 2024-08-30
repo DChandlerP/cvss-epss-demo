@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Info App</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .result { margin-top: 20px; }
+    </style>
+    <!-- Keep the script in the head if using DOMContentLoaded -->
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <h1>Vulnerability Lookup</h1>
+    <input type="text" id="vulnId" placeholder="Enter CVE ID" value="CVE-2019-1010218">
+    <div>
+        <label>
+            <input type="radio" name="api" value="cvss" checked> CVSS
+        </label>
+        <label>
+            <input type="radio" name="api" value="epss"> EPSS
+        </label>
+    </div>
+    <button id="fetchButton">Get Info</button>
+    <div class="result" id="result"></div>
+</body>
+</html>
